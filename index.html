@@ -19,93 +19,102 @@
 
     header {
       width: 100%;
-      padding: 2rem 2rem 1.5rem;
+      padding: 2.5rem 2rem 2rem;
       text-align: center;
-      border-bottom: 1px solid #1e1e1e;
     }
 
     header h1 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
       color: #ffffff;
     }
 
     header p {
-      margin-top: 0.4rem;
-      font-size: 0.9rem;
-      color: #888;
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: #666;
     }
 
     main {
-      flex: 1;
       width: 100%;
-      max-width: 860px;
-      padding: 2rem 1.5rem;
+      max-width: 680px;
+      padding: 1.5rem 1.5rem 6rem;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1rem;
     }
 
     /* ── Agent card ── */
     .agent-card {
       background: #161616;
       border: 1px solid #252525;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .agent-card-header {
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid #252525;
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 1rem;
     }
 
-    .agent-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #22c55e;
+    .agent-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: #1e3a5f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
       flex-shrink: 0;
     }
 
-    .agent-card-header h2 {
-      font-size: 1rem;
-      font-weight: 500;
+    .agent-info { flex: 1; }
+
+    .agent-info h2 {
+      font-size: 0.95rem;
+      font-weight: 600;
       color: #e5e5e5;
     }
 
-    .agent-card-header span {
-      margin-left: auto;
-      font-size: 0.75rem;
-      color: #555;
+    .agent-info p {
+      margin-top: 0.2rem;
+      font-size: 0.8rem;
+      color: #666;
     }
 
-    .agent-card-body {
-      padding: 1.25rem;
-      min-height: 420px;
+    .agent-status {
       display: flex;
-      align-items: stretch;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: #22c55e;
     }
 
-    langflow-chat {
-      width: 100%;
+    .agent-status::before {
+      content: "";
+      display: block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .hint {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #444;
+      margin-top: 0.5rem;
     }
 
     footer {
+      margin-top: auto;
       padding: 1.5rem;
       font-size: 0.75rem;
-      color: #444;
+      color: #333;
       text-align: center;
     }
   </style>
 
-  <!--
-    Langflow embedded chat widget.
-    Docs: https://github.com/logspace-ai/langflow-embedded-chat
-  -->
   <script src="https://cdn.jsdelivr.net/gh/logspace-ai/langflow-embedded-chat@v1.0.7/dist/build/static/js/bundle.min.js"></script>
 </head>
 <body>
@@ -118,29 +127,31 @@
   <main>
 
     <div class="agent-card">
-      <div class="agent-card-header">
-        <div class="agent-dot"></div>
+      <div class="agent-icon">🏴‍☠️</div>
+      <div class="agent-info">
         <h2>Pirate test</h2>
-        <span>Langflow agent</span>
+        <p>Click the chat button → to start a conversation</p>
       </div>
-      <div class="agent-card-body">
-        <!--
-          ⚠️  host_url must be a publicly reachable URL when deployed.
-              While testing locally you can expose Langflow with:
-                ngrok http 7860
-              Then replace http://localhost:7860 with your ngrok URL.
-        -->
-        <langflow-chat
-          window_title="Pirate test"
-          flow_id="dd5873b8-87c8-48b0-b76d-370a629b0402"
-          host_url="http://localhost:7860"
-        ></langflow-chat>
-      </div>
+      <div class="agent-status">Live</div>
     </div>
+
+    <p class="hint">The chat bubble appears in the bottom-right corner</p>
 
   </main>
 
   <footer>Built with Langflow</footer>
+
+  <!--
+    ⚠️  host_url must be publicly reachable.
+        Locally: run `ngrok http 7860` and paste the ngrok URL below.
+        In production: replace with your hosted Langflow URL.
+  -->
+  <langflow-chat
+    window_title="Pirate test"
+    flow_id="dd5873b8-87c8-48b0-b76d-370a629b0402"
+    host_url="http://localhost:7860"
+    chat_position="bottom-right"
+  ></langflow-chat>
 
 </body>
 </html>
